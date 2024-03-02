@@ -17,7 +17,7 @@ namespace Memory.View
         {
             foreach (Tile tile in model.Tiles)
             {
-                GameObject tileInstance = Instantiate(tilePrefab, new Vector3(tile.Row,0.1f,tile.Column), Quaternion.identity);
+                GameObject tileInstance = Instantiate(tilePrefab, new Vector3(tile.Row *(tilePrefab.transform.localScale.x + 0.5f) ,0.1f,tile.Column * (tilePrefab.transform.localScale.z + 0.5f)), Quaternion.identity);
                 tileInstance.transform.SetParent(transform);
                 tileInstance.GetComponent<TileView>().SetModel(tile);
             }
