@@ -12,12 +12,12 @@ namespace Memory.View
         [SerializeField]private GameObject _memoryBoard;
 
         private MemoryBoard _board;
-        private List<Memory.Model.Tile> _tiles;
+        private List<Tile> _tiles;
 
         void Start()
         {
             _board = new MemoryBoard(3, 3);
-            _tiles = new List<Memory.Model.Tile>();
+            _tiles = new List<Tile>();
             _tiles = _board.Tiles;
             _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);
         }

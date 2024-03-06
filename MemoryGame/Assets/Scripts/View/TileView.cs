@@ -16,11 +16,15 @@ namespace Memory.View
         }
         public void OnPointerDown(PointerEventData eventData)
         {
+            _tileModel.Board.PrewingTiles.Add(_tileModel);
         }
 
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-
+            if (e.PropertyName.Equals(Model.TileState))
+            {
+                //startAnimation
+            }
         }
 
         // Start is called before the first frame update
