@@ -36,6 +36,7 @@ namespace Memory.View
                 tileInstance.transform.SetParent(transform);
                 tileInstance.GetComponent<TileView>().SetModel(tile);
             }
+
         }
     }
 }

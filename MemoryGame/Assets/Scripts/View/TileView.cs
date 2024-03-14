@@ -18,9 +18,8 @@ namespace Memory.View
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log(this.name + " clicked");
+            Debug.Log(_tileModel.ToString() + " clicked");
             _tileModel.Board.PrewingTiles.Add(_tileModel);
-            //StartCoroutine(StartAnimation());
         }
 
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)

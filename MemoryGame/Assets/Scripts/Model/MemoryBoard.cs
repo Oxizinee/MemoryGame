@@ -18,6 +18,8 @@ namespace Memory.Model
                 OnPropertyChanged();
             }
         }
+        public Player Player1 { get; set; }
+        public Player Player2 { get; set; }
         private int _rows;
         public int Rows
         {
@@ -50,26 +52,29 @@ namespace Memory.Model
                 return PrewingTiles[0].MemoryCardId == PrewingTiles[1].MemoryCardId;
             }
         }
-        public MemoryBoard(int rows, int columns)
+        public MemoryBoard(int rows, int columns, Player player1, Player player2)
         {
             Tiles = new List<Tile>();
             PrewingTiles = new List<Tile>();
 
             Rows = rows;
             Columns = columns;
-           // BoardState = new BoardNoPreviewState();
+
+            Player1 = player1;
+            Player2 = player2;
+
+            BoardState = new BoardNoPreviewState(this);
 
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    Tile tile = new Tile(i,j,this);
+                    Tile tile = new Tile(i, j, this);
                     Tiles.Add(tile);
                 }
             }
 
             AssignMemoryCardIds();
-
         }
         private void AssignMemoryCardIds()
         {
