@@ -53,6 +53,7 @@ namespace Memory.Model
         public MemoryBoard(int rows, int columns)
         {
             Tiles = new List<Tile>();
+            PrewingTiles = new List<Tile>();
 
             Rows = rows;
             Columns = columns;

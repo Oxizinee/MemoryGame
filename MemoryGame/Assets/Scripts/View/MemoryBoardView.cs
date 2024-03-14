@@ -30,7 +30,7 @@ namespace Memory.View
                 float xPos = startX + tile.Column * offset.x;
                 float zPos = startY - tile.Row * offset.y;
 
-                Vector3 position = new Vector3(xPos, 0.1f, zPos);
+                Vector3 position = new Vector3(xPos, 0.03f, zPos);
 
                 GameObject tileInstance = Instantiate(tilePrefab, position, Quaternion.identity);
                 tileInstance.transform.SetParent(transform);
