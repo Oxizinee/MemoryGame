@@ -1,6 +1,7 @@
 using Memory.Model.States;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace Memory.Model
 {
@@ -42,10 +43,28 @@ namespace Memory.Model
                 OnPropertyChanged();
             }
         }
-        public float Elapsed {  get; set; }
+        private float _elapsed;
+        public float Elapsed 
+        { 
+            get { return _elapsed; } 
+            set 
+            { 
+                if(_elapsed == value) return;
+                _elapsed = value;
+                OnPropertyChanged();
+            } 
+        }
+        public int mm { get { return (int)(Elapsed / 60); } }
+        public int ss { get { return (int)(Elapsed%60); } }
+        public int ms { get { return (int)(Elapsed%1) * 1000; } }
         public Player()
         {
             
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} player";
         }
     }
 }

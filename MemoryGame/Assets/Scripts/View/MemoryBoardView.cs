@@ -11,12 +11,32 @@ namespace Memory.View
     public class MemoryBoardView : ViewBaseClass<MemoryBoard>
     {
         [SerializeField] private float _spacing = 1f;
+        private MemoryBoard _boardModel;
+
+        public string player1;
+        public string player2;
+
+        private PlayerView _player1;
+        private PlayerView _player2;
+        
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
         }
 
+        public void SetPlayers(PlayerView player1, PlayerView player2)
+        {
+            _player1 = player1;
+            _player2 = player2;
+
+            _boardModel.Player1 = _player1.Model;
+            _boardModel.Player2 = _player2.Model;
+            _boardModel.CurrentPlayer = _player1.Model;
+        }
         public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab, Material[] tileMaterials)
         {
+            _boardModel = model;
+            Model = _boardModel;
+
             float totalWidth = (tilePrefab.transform.localScale.x + _spacing) * model.Columns - _spacing;
             float totalHeight = (tilePrefab.transform.localScale.z + _spacing) * model.Rows - _spacing;
 
@@ -40,6 +60,17 @@ namespace Memory.View
             }
 
         }
-
+        private void Update()
+        {
+            if (_boardModel.CurrentPlayer != null)
+            {
+                if (_boardModel.CurrentPlayer.IsActive)
+                {
+                      _boardModel.CurrentPlayer.Elapsed += Time.deltaTime;
+                }
+                player1 = _boardModel.Player1.ToString();
+                player2 = _boardModel.Player2.ToString();
+            }
+        }
     }
 }

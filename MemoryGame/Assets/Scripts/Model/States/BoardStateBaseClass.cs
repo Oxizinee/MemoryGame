@@ -26,31 +26,15 @@ namespace Memory.Model.States
         }
         public override void TileAnimationEnded(Tile tile)
         {
-            SwitchPlayers();
+            Board.ToggleActivePlayer();
         }
 
-        private void SwitchPlayers()
-        {
-            if(Board.CurrentPlayer == Board.Player1) 
-            {
-                Board.CurrentPlayer.IsActive = false;
-                Board.CurrentPlayer = Board.Player2;
-                Board.CurrentPlayer.IsActive = true;
-            }
-            else
-            {
-                Board.CurrentPlayer.IsActive = false;
-                Board.CurrentPlayer = Board.Player1;
-                Board.CurrentPlayer.IsActive = true;
-            }
-        }
         public override void AddPreview(Tile tile)
         {
             if(tile.TileState.State != TileStates.Hidden) return;
 
             tile.TileState = new TilePreviewState(tile);
             Board.PrewingTiles.Add(tile);
-          //  SwitchPlayers();
             Board.BoardState = new BoardOnePreviewState(Board);
         }
     }

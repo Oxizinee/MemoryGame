@@ -25,7 +25,7 @@ public class PlayerView : ViewBaseClass<Player>
         if (_playerModel.IsActive)
         {
             ScoreText.text = _playerModel.Score.ToString();
-
+            TimeText.text = _playerModel.Elapsed.ToString("F2");
             NameText.color = Color.yellow;
             ScoreText.color = Color.yellow;
             TimeText.color = Color.yellow;
@@ -38,18 +38,4 @@ public class PlayerView : ViewBaseClass<Player>
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(_playerModel.IsActive) 
-        {
-           TimeText.text =  (_playerModel.Elapsed += Time.deltaTime).ToString("F2");
-        }
-
-    }
 }

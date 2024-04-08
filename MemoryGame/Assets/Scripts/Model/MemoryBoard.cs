@@ -1,4 +1,5 @@
 using Memory.Model.States;
+using Memory.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,6 @@ namespace Memory.Model
         }
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
-
         public Player CurrentPlayer {  get; set; }  
 
         private int _rows;
@@ -55,19 +55,13 @@ namespace Memory.Model
                 return PrewingTiles[0].MemoryCardId == PrewingTiles[1].MemoryCardId;
             }
         }
-        public MemoryBoard(int rows, int columns, Player player1, Player player2)
+        public MemoryBoard(int rows, int columns)
         {
             Tiles = new List<Tile>();
             PrewingTiles = new List<Tile>();
 
             Rows = rows;
             Columns = columns;
-
-            Player1 = player1;
-            Player2 = player2;
-
-            CurrentPlayer = Player1;
-            CurrentPlayer.IsActive = true;
 
             BoardState = new BoardNoPreviewState(this);
 
@@ -84,14 +78,21 @@ namespace Memory.Model
         }
         private void AssignMemoryCardIds()
         {
-            int maxID = Tiles.Count /2;
+            List<Tile> ShuffledCards = ExtensionMethods.Shuffle(Tiles);
+            List<int> MemmoryIDs = new List<int>();
+            for (int i = 0; i <= (Tiles.Count-1) / 2; i++)
+            {
+                MemmoryIDs.Add(i);  
+            }
+            List<int> ShuffledIDs = ExtensionMethods.Shuffle(MemmoryIDs);
+
 
             if ((Tiles.Count) % 2 == 0) //even
             {
                 for (int i = 0; i < (Tiles.Count) / 2; i++)
                 {
-                    Tiles[i].MemoryCardId = i;
-                    Tiles[(Tiles.Count - 1) - i].MemoryCardId = i;
+                    Tiles[i].MemoryCardId = ShuffledIDs[i];
+                    Tiles[(Tiles.Count - 1) - i].MemoryCardId = ShuffledIDs[i];
                 }
             }
             else if((Tiles.Count) % 2 == 1) //uneven
@@ -99,16 +100,31 @@ namespace Memory.Model
                 int i = 0;
                 for (i = 0; i < (Tiles.Count - 1) / 2; i++)
                 {
-                    Tiles[i].MemoryCardId = i;
-                    Tiles[(Tiles.Count - 1) - i].MemoryCardId = i;
+                    ShuffledCards[i].MemoryCardId = ShuffledIDs[i];
+                    ShuffledCards[(ShuffledCards.Count - 1) - i].MemoryCardId = ShuffledIDs[i];
                 }
-                Tiles[Tiles.Count - 1].MemoryCardId = i;
+               // ShuffledCards[ShuffledCards.Count - 1].MemoryCardId = ShuffledIDs[i];
             }
         }
 
         public override string ToString()
         {
             return $"Board: {Rows},{Columns}";
+        }
+        public void ToggleActivePlayer()
+        {
+            if (CurrentPlayer == Player1)
+            {
+                CurrentPlayer.IsActive = false;
+                CurrentPlayer = Player2;
+                CurrentPlayer.IsActive = true;
+            }
+            else
+            {
+                CurrentPlayer.IsActive = false;
+                CurrentPlayer = Player1;
+                CurrentPlayer.IsActive = true;
+            }
         }
     }
 }
