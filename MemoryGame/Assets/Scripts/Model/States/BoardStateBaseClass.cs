@@ -6,7 +6,7 @@ namespace Memory.Model.States
 {
     public abstract class BoardStateBaseClass : IBoardState
     {
-        public abstract BoardStates BoardState { get; } 
+        public abstract BoardStates State { get; } 
         public MemoryBoard Board { get; set; }
         public BoardStateBaseClass(MemoryBoard board)
         {
@@ -19,7 +19,7 @@ namespace Memory.Model.States
 
     public class BoardNoPreviewState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.NoPreview;
+        public override BoardStates State { get; } = BoardStates.NoPreview;
         public BoardNoPreviewState(MemoryBoard board): base(board)
         {
 
@@ -39,7 +39,7 @@ namespace Memory.Model.States
 
     public class BoardOnePreviewState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.OnePreview;
+        public override BoardStates State { get; } = BoardStates.OnePreview;
         public BoardOnePreviewState(MemoryBoard board): base(board)
         {
 
@@ -72,7 +72,7 @@ namespace Memory.Model.States
 
     public class BoardTwoPreviewState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.TwoPreview;
+        public override BoardStates State { get; } = BoardStates.TwoPreview;
         public BoardTwoPreviewState(MemoryBoard board): base(board)
         {
 
@@ -96,7 +96,7 @@ namespace Memory.Model.States
     }
     public class BoardTwoFoundState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.TwoFound;
+        public override BoardStates State { get; } = BoardStates.TwoFound;
         public BoardTwoFoundState(MemoryBoard board): base(board)
         {
 
@@ -123,7 +123,7 @@ namespace Memory.Model.States
     }
     public class BoardTwoHiddingState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.TwoHiding;
+        public override BoardStates State { get; } = BoardStates.TwoHiding;
         public BoardTwoHiddingState(MemoryBoard board) : base(board)
         {
 
@@ -143,7 +143,7 @@ namespace Memory.Model.States
     }
     public class BoardFinishedState : BoardStateBaseClass
     {
-        public override BoardStates BoardState { get; } = BoardStates.Finished;
+        public override BoardStates State { get; } = BoardStates.Finished;
         public BoardFinishedState(MemoryBoard board) : base(board)
         {
 

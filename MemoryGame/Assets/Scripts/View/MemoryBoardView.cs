@@ -1,4 +1,5 @@
 using Memory.Model;
+using Memory.Model.States;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,5 +39,6 @@ namespace Memory.View
             }
 
         }
+
     }
 }

@@ -5,7 +5,7 @@ namespace Memory.Model.States
 {
     public interface IBoardState 
     {
-        BoardStates BoardState { get; }
+        BoardStates State { get; }
         MemoryBoard Board { get; set; }
         void AddPreview(Tile tile);
         void TileAnimationEnded(Tile tile);

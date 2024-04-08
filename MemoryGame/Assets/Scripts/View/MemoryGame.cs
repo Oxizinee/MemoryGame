@@ -1,4 +1,5 @@
 using Memory.Model;
+using Memory.Model.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Memory.View
         [SerializeField]private GameObject _memoryBoard;
         [SerializeField] private GameObject _player1;
         [SerializeField] private GameObject _player2;
+
+        [SerializeField] private BoardStates _boardState;
 
         private MemoryBoard _board;
         private List<Tile> _tiles;
@@ -41,7 +44,7 @@ namespace Memory.View
         // Update is called once per frame
         void Update()
         {
-
+            _boardState = _board.BoardState.State;
         }
     }
 }
