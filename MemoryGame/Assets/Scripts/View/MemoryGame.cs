@@ -27,27 +27,41 @@ namespace Memory.View
 
         void Start()
         {
-            //SetPlayers();
+            SetPlayers("Player1", "Player2");
             _board = new MemoryBoard(3, 3, _playerOneModel, _playerTwoModel);
             _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab, _cardMaterials);
-            //this method above should also assign correct materials to the cards!
         }
 
-        private void SetPlayers()
+        private void SetPlayers(string PlayerOneName, string PlayerTwoName)
         {
+            //create players
             _playerOneModel = new Player();
             _playerTwoModel = new Player();
-            _playerOneModel.IsActive = true;
-            _playerTwoModel.IsActive = false;
 
+            //set player names
+            _playerOneModel.Name = PlayerOneName;
+            _playerTwoModel.Name = PlayerTwoName;
+            
+            //set models
             _player1.GetComponent<PlayerView>().SetModel(_playerOneModel);
             _player2.GetComponent<PlayerView>().SetModel(_playerTwoModel);
+            
+            //set initial active states
+            _playerTwoModel.IsActive = false;
+            _playerOneModel.IsActive = true;
+
         }
 
         // Update is called once per frame
         void Update()
         {
             _boardState = _board.BoardState.State;
+
+
+            if(Input.GetMouseButtonDown(0)) 
+            {
+                _playerOneModel.IsActive = !_playerOneModel.IsActive;
+            }
         }
     }
 }

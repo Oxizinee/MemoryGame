@@ -13,20 +13,28 @@ public class PlayerView : ViewBaseClass<Player>
     private Player _playerModel;
     public void SetModel(Player player)
     {
-        _playerModel = player;
+       _playerModel = player;
+       Model = _playerModel;
 
-        _playerModel.PropertyChanged += Model_PropertyChanged;
+        NameText.text = player.Name;
+        ScoreText.text = _playerModel.Score.ToString();
+        TimeText.text = _playerModel.Elapsed.ToString();    
     }
     protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (_playerModel.IsActive)
         {
-            NameText.text = _playerModel.Name;
+            ScoreText.text = _playerModel.Score.ToString();
+
             NameText.color = Color.yellow;
+            ScoreText.color = Color.yellow;
+            TimeText.color = Color.yellow;
         }
         else
         {
             NameText.color = Color.gray;
+            ScoreText.color = Color.gray;
+            TimeText.color = Color.gray;
         }
     }
 
@@ -38,6 +46,10 @@ public class PlayerView : ViewBaseClass<Player>
     // Update is called once per frame
     void Update()
     {
-        
+        if(_playerModel.IsActive) 
+        {
+           TimeText.text =  (_playerModel.Elapsed += Time.deltaTime).ToString("F2");
+        }
+
     }
 }

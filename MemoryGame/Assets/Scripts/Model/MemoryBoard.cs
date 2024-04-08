@@ -20,6 +20,7 @@ namespace Memory.Model
         }
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
+
         private int _rows;
         public int Rows
         {
@@ -63,6 +64,9 @@ namespace Memory.Model
             Player1 = player1;
             Player2 = player2;
 
+            Player1.IsActive = true;
+            Player2.IsActive = false;
+
             BoardState = new BoardNoPreviewState(this);
 
             for (int i = 0; i < Rows; i++)
@@ -78,6 +82,8 @@ namespace Memory.Model
         }
         private void AssignMemoryCardIds()
         {
+            int maxID = Tiles.Count /2;
+
             if ((Tiles.Count) % 2 == 0) //even
             {
                 for (int i = 0; i < (Tiles.Count) / 2; i++)

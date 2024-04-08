@@ -12,6 +12,7 @@ namespace Memory.View
     public class TileView : ViewBaseClass<Tile>, IPointerClickHandler
     {
         public GameObject BackSide;
+        public int ID;
         private Tile _tileModel;
         private Animator _animator;
 
@@ -19,6 +20,7 @@ namespace Memory.View
         {
             _tileModel = tile;
             Model = _tileModel;
+            ID = _tileModel.MemoryCardId;
 
         }
         public void OnPointerClick(PointerEventData eventData)
