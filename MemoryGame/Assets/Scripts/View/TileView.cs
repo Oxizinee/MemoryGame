@@ -79,8 +79,7 @@ namespace Memory.View
 
         public void AnimationEndHandler(string name) 
         {
-            // TODO: COMMUNICATE TO THE BOARD
-            //Debug.Log($"{name} animation ended");
+            Debug.Log($"{name} animation ended");
             _tileModel.Board.BoardState.TileAnimationEnded(_tileModel);
         }
        

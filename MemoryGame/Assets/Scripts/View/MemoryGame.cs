@@ -45,11 +45,6 @@ namespace Memory.View
             //set models
             _player1.GetComponent<PlayerView>().SetModel(_playerOneModel);
             _player2.GetComponent<PlayerView>().SetModel(_playerTwoModel);
-            
-            //set initial active states
-            _playerTwoModel.IsActive = false;
-            _playerOneModel.IsActive = true;
-
         }
 
         // Update is called once per frame
@@ -57,11 +52,6 @@ namespace Memory.View
         {
             _boardState = _board.BoardState.State;
 
-
-            if(Input.GetMouseButtonDown(0)) 
-            {
-                _playerOneModel.IsActive = !_playerOneModel.IsActive;
-            }
         }
     }
 }

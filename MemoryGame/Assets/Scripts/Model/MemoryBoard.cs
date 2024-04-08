@@ -21,6 +21,8 @@ namespace Memory.Model
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
 
+        public Player CurrentPlayer {  get; set; }  
+
         private int _rows;
         public int Rows
         {
@@ -64,8 +66,8 @@ namespace Memory.Model
             Player1 = player1;
             Player2 = player2;
 
-            Player1.IsActive = true;
-            Player2.IsActive = false;
+            CurrentPlayer = Player1;
+            CurrentPlayer.IsActive = true;
 
             BoardState = new BoardNoPreviewState(this);
 

@@ -26,6 +26,23 @@ namespace Memory.Model.States
         }
         public override void TileAnimationEnded(Tile tile)
         {
+            SwitchPlayers();
+        }
+
+        private void SwitchPlayers()
+        {
+            if(Board.CurrentPlayer == Board.Player1) 
+            {
+                Board.CurrentPlayer.IsActive = false;
+                Board.CurrentPlayer = Board.Player2;
+                Board.CurrentPlayer.IsActive = true;
+            }
+            else
+            {
+                Board.CurrentPlayer.IsActive = false;
+                Board.CurrentPlayer = Board.Player1;
+                Board.CurrentPlayer.IsActive = true;
+            }
         }
         public override void AddPreview(Tile tile)
         {
@@ -33,6 +50,7 @@ namespace Memory.Model.States
 
             tile.TileState = new TilePreviewState(tile);
             Board.PrewingTiles.Add(tile);
+          //  SwitchPlayers();
             Board.BoardState = new BoardOnePreviewState(Board);
         }
     }
@@ -109,6 +127,7 @@ namespace Memory.Model.States
         public override void TileAnimationEnded(Tile tile)
         {
             Board.PrewingTiles.Remove(tile);
+            Board.CurrentPlayer.Score += 1;
 
             if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
