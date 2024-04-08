@@ -18,8 +18,6 @@ namespace Memory.View
         [SerializeField] private BoardStates _boardState;
 
         private MemoryBoard _board;
-       // private Player _playerOneModel;
-      //  private Player _playerTwoModel;
 
         [Header("Card Materials")]
         [SerializeField] private Material[] _cardMaterials;

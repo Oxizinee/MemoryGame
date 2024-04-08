@@ -13,9 +13,6 @@ namespace Memory.View
         [SerializeField] private float _spacing = 1f;
         private MemoryBoard _boardModel;
 
-        public string player1;
-        public string player2;
-
         private PlayerView _player1;
         private PlayerView _player2;
         
@@ -65,8 +62,6 @@ namespace Memory.View
             if (_boardModel.CurrentPlayer != null)
             {
                 _boardModel.CurrentPlayer.Elapsed += Time.deltaTime;
-                player1 = _boardModel.Player1.ToString();
-                player2 = _boardModel.Player2.ToString();
             }
         }
     }

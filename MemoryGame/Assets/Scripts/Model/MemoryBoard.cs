@@ -103,7 +103,7 @@ namespace Memory.Model
                     ShuffledCards[i].MemoryCardId = ShuffledIDs[i];
                     ShuffledCards[(ShuffledCards.Count - 1) - i].MemoryCardId = ShuffledIDs[i];
                 }
-               // ShuffledCards[ShuffledCards.Count - 1].MemoryCardId = ShuffledIDs[i];
+                ShuffledCards[ShuffledCards.Count - 1].MemoryCardId = ShuffledIDs[i];
             }
         }
 

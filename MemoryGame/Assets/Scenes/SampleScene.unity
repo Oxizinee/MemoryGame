@@ -473,8 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilePrefab: {fileID: 7728379900379920771, guid: 340d3d081652a3a408e62a0730479ee1, type: 3}
   _memoryBoard: {fileID: 1366394518}
-  _player1: {fileID: 854254429}
-  _player2: {fileID: 499185593}
+  _player1View: {fileID: 854254429}
+  _player2View: {fileID: 499185593}
   _boardState: 0
   _cardMaterials:
   - {fileID: 2100000, guid: dd65019213522114d993a83ff511bef0, type: 2}
