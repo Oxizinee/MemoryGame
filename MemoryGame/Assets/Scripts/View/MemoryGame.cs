@@ -3,6 +3,7 @@ using Memory.Model.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Memory.View
 {
@@ -17,17 +18,19 @@ namespace Memory.View
         [SerializeField] private BoardStates _boardState;
 
         private MemoryBoard _board;
-        private List<Tile> _tiles;
         private Player _playerOneModel;
         private Player _playerTwoModel;
 
+        [Header("Card Materials")]
+        [SerializeField] private Material[] _cardMaterials;
+
+
         void Start()
         {
-            SetPlayers();
+            //SetPlayers();
             _board = new MemoryBoard(3, 3, _playerOneModel, _playerTwoModel);
-            _tiles = new List<Tile>();
-            _tiles = _board.Tiles;
-            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);
+            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab, _cardMaterials);
+            //this method above should also assign correct materials to the cards!
         }
 
         private void SetPlayers()

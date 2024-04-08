@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2583542561967583260, guid: 9106f2c8e41bdc142b6caa31fa962e5f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f142d22f8c0a3543bdfddec3520c002, type: 2}
     - target: {fileID: 4586062439123284955, guid: 9106f2c8e41bdc142b6caa31fa962e5f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -128,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eab2c02728c787409646710a6e1f5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackSide: {fileID: 4026089085512846156}
 --- !u!95 &3579718454229603610
 Animator:
   serializedVersion: 5

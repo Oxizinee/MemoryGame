@@ -110,12 +110,12 @@ namespace Memory.Model.States
         {
             Board.PrewingTiles.Remove(tile);
 
-            if (Board.PrewingTiles.Count == 0 &&
+            if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
             {
                 Board.BoardState = new BoardFinishedState(Board);
             }
-            else if (Board.PrewingTiles.Count == 0)
+            else if (Board.PrewingTiles.Count <= 0)
             {
                 Board.BoardState = new BoardNoPreviewState(Board);
             }

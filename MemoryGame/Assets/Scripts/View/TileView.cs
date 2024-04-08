@@ -11,6 +11,7 @@ namespace Memory.View
 {
     public class TileView : ViewBaseClass<Tile>, IPointerClickHandler
     {
+        public GameObject BackSide;
         private Tile _tileModel;
         private Animator _animator;
 

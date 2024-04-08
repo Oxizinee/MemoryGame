@@ -15,7 +15,7 @@ namespace Memory.View
         {
         }
 
-        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab)
+        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab, Material[] tileMaterials)
         {
             float totalWidth = (tilePrefab.transform.localScale.x + _spacing) * model.Columns - _spacing;
             float totalHeight = (tilePrefab.transform.localScale.z + _spacing) * model.Rows - _spacing;
@@ -34,6 +34,7 @@ namespace Memory.View
                 Vector3 position = new Vector3(xPos, 0.03f, zPos);
 
                 GameObject tileInstance = Instantiate(tilePrefab, position, Quaternion.identity);
+                tileInstance.GetComponent<TileView>().BackSide.GetComponent<Renderer>().sharedMaterial = tileMaterials[tile.MemoryCardId];
                 tileInstance.transform.SetParent(transform);
                 tileInstance.GetComponent<TileView>().SetModel(tile);
             }
