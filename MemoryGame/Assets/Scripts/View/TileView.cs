@@ -10,6 +10,7 @@ namespace Memory.View
     public class TileView : ViewBaseClass<Tile>, IPointerClickHandler
     {
         private Tile _tileModel;
+        private Animator _animator;
         public void SetModel(Tile tile)
         {
             _tileModel = tile;
@@ -20,13 +21,14 @@ namespace Memory.View
         {
             Debug.Log(_tileModel.ToString() + " clicked");
             _tileModel.Board.PrewingTiles.Add(_tileModel);
+            _animator.Play("Shown");
         }
 
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals(Model.TileState))
             {
-                StartCoroutine(StartAnimation());
+                //StartCoroutine(StartAnimation());
             }
         }
 
@@ -58,13 +60,8 @@ namespace Memory.View
         // Start is called before the first frame update
         void Start()
         {
-
+            _animator = GetComponent<Animator>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

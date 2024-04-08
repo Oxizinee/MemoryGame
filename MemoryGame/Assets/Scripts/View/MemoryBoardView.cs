@@ -9,7 +9,7 @@ namespace Memory.View
 {
     public class MemoryBoardView : ViewBaseClass<MemoryBoard>
     {
-        private float _spacing = 0.5f;
+        [SerializeField] private float _spacing = 1f;
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
         }
