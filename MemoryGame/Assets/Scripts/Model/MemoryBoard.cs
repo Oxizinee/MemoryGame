@@ -126,5 +126,17 @@ namespace Memory.Model
                 CurrentPlayer.IsActive = true;
             }
         }
+
+        public void FinishGame()
+        {
+            CurrentPlayer = null;
+            Player1.IsActive = false;
+            Player2.IsActive = false;
+        }
+
+        public void AddScore()
+        {
+            CurrentPlayer.Score++;
+        }
     }
 }

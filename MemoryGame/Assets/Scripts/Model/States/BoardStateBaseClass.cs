@@ -111,7 +111,7 @@ namespace Memory.Model.States
         public override void TileAnimationEnded(Tile tile)
         {
             Board.PrewingTiles.Remove(tile);
-            Board.CurrentPlayer.Score += 1;
+            Board.AddScore();
 
             if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
@@ -157,6 +157,7 @@ namespace Memory.Model.States
 
         public override void TileAnimationEnded(Tile tile)
         {
+            Board.FinishGame();
         }
     }
 }

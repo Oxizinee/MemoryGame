@@ -48,10 +48,13 @@ namespace Memory.Model
         { 
             get { return _elapsed; } 
             set 
-            { 
-                if(_elapsed == value) return;
-                _elapsed = value;
-                OnPropertyChanged();
+            {
+                if (IsActive)
+                {
+                    if (_elapsed == value) return;
+                    _elapsed = value;
+                    OnPropertyChanged();
+                }
             } 
         }
         public int mm { get { return (int)(Elapsed / 60); } }

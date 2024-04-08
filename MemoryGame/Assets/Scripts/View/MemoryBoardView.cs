@@ -64,10 +64,7 @@ namespace Memory.View
         {
             if (_boardModel.CurrentPlayer != null)
             {
-                if (_boardModel.CurrentPlayer.IsActive)
-                {
-                      _boardModel.CurrentPlayer.Elapsed += Time.deltaTime;
-                }
+                _boardModel.CurrentPlayer.Elapsed += Time.deltaTime;
                 player1 = _boardModel.Player1.ToString();
                 player2 = _boardModel.Player2.ToString();
             }
