@@ -26,7 +26,6 @@ namespace Memory.Model.States
         }
         public override void TileAnimationEnded(Tile tile)
         {
-            Board.ToggleActivePlayer();
         }
 
         public override void AddPreview(Tile tile)
@@ -55,10 +54,12 @@ namespace Memory.Model.States
             if (Board.IsCombinationFound)
             {
                 Board.BoardState = new BoardTwoFoundState(Board);
+                Board.AddScore();
                 foreach (Tile t in Board.PrewingTiles)
                 {
                     t.TileState = new TileFoundState(t);
                 }
+
             }
             else
             {
@@ -111,7 +112,6 @@ namespace Memory.Model.States
         public override void TileAnimationEnded(Tile tile)
         {
             Board.PrewingTiles.Remove(tile);
-            Board.AddScore();
 
             if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
@@ -121,6 +121,7 @@ namespace Memory.Model.States
             else if (Board.PrewingTiles.Count <= 0)
             {
                 Board.BoardState = new BoardNoPreviewState(Board);
+                Board.ToggleActivePlayer();
             }
         }
     }
@@ -141,6 +142,7 @@ namespace Memory.Model.States
             if (Board.PrewingTiles.Count == 0)
             {
                 Board.BoardState = new BoardNoPreviewState(Board);
+                Board.ToggleActivePlayer();
             }
         }
     }

@@ -76,7 +76,7 @@ namespace Memory.View
 
         public void AnimationEndHandler(string name) 
         {
-            Debug.Log($"{name} animation ended");
+          //  Debug.Log($"{name} animation ended");
             _tileModel.Board.BoardState.TileAnimationEnded(_tileModel);
         }
        
