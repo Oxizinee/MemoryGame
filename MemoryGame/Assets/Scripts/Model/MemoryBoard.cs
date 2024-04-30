@@ -1,8 +1,11 @@
+using Memory.Data;
 using Memory.Model.States;
 using Memory.Utilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Build;
 
 namespace Memory.Model
 {
@@ -78,32 +81,29 @@ namespace Memory.Model
         }
         private void AssignMemoryCardIds()
         {
+            ImageRepository repository = ImageRepository.Instance;
+            repository.ProcessImageIds(AssignMemoryCardIds);
+        }
+        private void AssignMemoryCardIds(List<int> memoryCardIDs)
+        {
+            memoryCardIDs = memoryCardIDs.Shuffle();
             List<Tile> ShuffledCards = ExtensionMethods.Shuffle(Tiles);
-            List<int> MemmoryIDs = new List<int>();
-            for (int i = 0; i <= (Tiles.Count-1) / 2; i++)
-            {
-                MemmoryIDs.Add(i);  
-            }
-            List<int> ShuffledIDs = ExtensionMethods.Shuffle(MemmoryIDs);
 
+            int memoryCardIndex = 0;
+            bool first = true;
 
-            if ((Tiles.Count) % 2 == 0) //even
+           foreach(Tile tile in ShuffledCards) 
             {
-                for (int i = 0; i < (Tiles.Count) / 2; i++)
+                tile.MemoryCardId = memoryCardIDs[memoryCardIndex];
+                if (first)
                 {
-                    Tiles[i].MemoryCardId = ShuffledIDs[i];
-                    Tiles[(Tiles.Count - 1) - i].MemoryCardId = ShuffledIDs[i];
+                    first = false;
                 }
-            }
-            else if((Tiles.Count) % 2 == 1) //uneven
-            {
-                int i = 0;
-                for (i = 0; i < (Tiles.Count - 1) / 2; i++)
+                else
                 {
-                    ShuffledCards[i].MemoryCardId = ShuffledIDs[i];
-                    ShuffledCards[(ShuffledCards.Count - 1) - i].MemoryCardId = ShuffledIDs[i];
+                    memoryCardIndex++;
+                    first = true;
                 }
-                ShuffledCards[ShuffledCards.Count - 1].MemoryCardId = ShuffledIDs[i];
             }
         }
 
