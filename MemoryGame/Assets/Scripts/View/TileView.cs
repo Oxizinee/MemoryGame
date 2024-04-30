@@ -1,3 +1,4 @@
+using Memory.Data;
 using Memory.Model;
 using Memory.Model.States;
 using System;
@@ -33,8 +34,19 @@ namespace Memory.View
             {
                 StartAnimation();
             }
+            else if(e.PropertyName.Equals(nameof(Model.MemoryCardId))) 
+            {
+                LoadBack();
+            }
         }
-
+        private void LoadBack()
+        {
+            ImageRepository.Instance.GetProcessTexture(Model.MemoryCardId, LoadBack);
+        }
+        private void LoadBack(Texture2D texture)
+        {
+            BackSide.GetComponent<Renderer>().material.mainTexture = texture;
+        }
         private void StartAnimation()
         {
             if (Model.TileState.State == TileStates.Preview)

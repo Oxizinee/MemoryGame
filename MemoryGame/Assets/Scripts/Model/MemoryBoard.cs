@@ -129,9 +129,9 @@ namespace Memory.Model
 
         public void FinishGame()
         {
-            CurrentPlayer = null;
             Player1.IsActive = false;
             Player2.IsActive = false;
+            CurrentPlayer = null;
         }
 
         public void AddScore()

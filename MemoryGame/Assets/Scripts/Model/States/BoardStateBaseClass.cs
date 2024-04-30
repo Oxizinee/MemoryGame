@@ -155,6 +155,7 @@ namespace Memory.Model.States
         }
         public override void AddPreview(Tile tile)
         {
+               // Board.FinishGame();
         }
 
         public override void TileAnimationEnded(Tile tile)

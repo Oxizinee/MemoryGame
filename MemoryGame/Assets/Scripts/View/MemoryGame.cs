@@ -19,8 +19,6 @@ namespace Memory.View
 
         private MemoryBoard _board;
 
-        [Header("Card Materials")]
-        [SerializeField] private Material[] _cardMaterials;
 
 
         void Start()
@@ -28,7 +26,7 @@ namespace Memory.View
             _board = new MemoryBoard(3, 3);
             SetPlayers("Player1", "Player2");
 
-            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab, _cardMaterials);
+            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);
             _memoryBoard.GetComponent<MemoryBoardView>().SetPlayers(_player1View.GetComponent<PlayerView>(),
                 _player2View.GetComponent<PlayerView>());
 

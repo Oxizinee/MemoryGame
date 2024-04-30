@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +5,7 @@ using System.Data;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 namespace Memory.Data
 {
@@ -46,8 +46,30 @@ namespace Memory.Data
             {
                 string json = unityWebRequest.downloadHandler.text;
                 List<DBImage> images = JsonConvert.DeserializeObject<List<DBImage>>(json);
+                
                 List<int> imageBids = images.Select(x => x.ID).ToList();
                 processIds(imageBids);
+            }
+        }
+
+        public void GetProcessTexture(int imageID, Action<Texture2D> processTexture)
+        {
+            StartCoroutine(GetTextures(imageID, processTexture));
+        }
+
+        private IEnumerator GetTextures(int imageID, Action<Texture2D> processTexture)
+        {
+            UnityWebRequest unityWebRequest = UnityWebRequestTexture.GetTexture(urlMemoryImages + "/" + imageID);
+            yield return unityWebRequest.SendWebRequest();
+
+            if (unityWebRequest.result != UnityWebRequest.Result.Success)  // if unsuccessful
+            {
+                Debug.Log("ImageRepository.GetProcessTexture: " + unityWebRequest.error);
+            }
+            else
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(unityWebRequest);
+                processTexture(texture);
             }
         }
     }

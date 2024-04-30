@@ -29,7 +29,7 @@ namespace Memory.View
             _boardModel.Player2 = _player2.Model;
             _boardModel.CurrentPlayer = _player1.Model;
         }
-        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab, Material[] tileMaterials)
+        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab)
         {
             _boardModel = model;
             Model = _boardModel;
@@ -51,7 +51,7 @@ namespace Memory.View
                 Vector3 position = new Vector3(xPos, 0.03f, zPos);
 
                 GameObject tileInstance = Instantiate(tilePrefab, position, Quaternion.identity);
-                tileInstance.GetComponent<TileView>().BackSide.GetComponent<Renderer>().sharedMaterial = tileMaterials[tile.MemoryCardId];
+                //tileInstance.GetComponent<TileView>().BackSide.GetComponent<Renderer>().sharedMaterial = tileMaterials[tile.MemoryCardId];
                 tileInstance.transform.SetParent(transform);
                 tileInstance.GetComponent<TileView>().SetModel(tile);
             }
