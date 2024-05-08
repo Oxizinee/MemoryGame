@@ -107,21 +107,24 @@ namespace Memory.Model.States
 
         public override void AddPreview(Tile tile)
         {
+
         }
 
         public override void TileAnimationEnded(Tile tile)
         {
-            Board.PrewingTiles.Remove(tile);
-
-            if (Board.PrewingTiles.Count <= 0 &&
+            if (tile == Board.PrewingTiles[1])
+            {
+                if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
-            {
-                Board.BoardState = new BoardFinishedState(Board);
-            }
-            else if (Board.PrewingTiles.Count <= 0)
-            {
-                Board.BoardState = new BoardNoPreviewState(Board);
-                Board.ToggleActivePlayer();
+                {
+                    Board.BoardState = new BoardFinishedState(Board);
+                }
+                else if (Board.PrewingTiles.Count <= 0)
+                {
+                    Board.PrewingTiles.Clear();
+                    Board.BoardState = new BoardNoPreviewState(Board);
+                    Board.ToggleActivePlayer();
+                }
             }
         }
     }
@@ -155,7 +158,6 @@ namespace Memory.Model.States
         }
         public override void AddPreview(Tile tile)
         {
-               // Board.FinishGame();
         }
 
         public override void TileAnimationEnded(Tile tile)

@@ -26,14 +26,14 @@ namespace Memory.Data
 
     public class ImageRepository : Singleton<ImageRepository>
     {
-        string urlMemoryImages = "https://localhost:7193/api/Image";
+        string urlMemoryImages = "http://localhost/www.MemoryImages.com/api/Image";
         
         public void ProcessImageIds(Action<List<int>> processIds)
         {
             StartCoroutine(GetImageIDs(processIds));
         }
 
-        private IEnumerator GetImageIDs(Action<List<int>> processIds)
+        private IEnumerator GetImageIDs(Action<List<int>> processIds) //get all images and info from website from database
         {
             UnityWebRequest unityWebRequest = UnityWebRequest.Get(urlMemoryImages);
             yield return unityWebRequest.SendWebRequest();
@@ -57,7 +57,7 @@ namespace Memory.Data
             StartCoroutine(GetTextures(imageID, processTexture));
         }
 
-        private IEnumerator GetTextures(int imageID, Action<Texture2D> processTexture)
+        private IEnumerator GetTextures(int imageID, Action<Texture2D> processTexture) //get specific image through image id
         {
             UnityWebRequest unityWebRequest = UnityWebRequestTexture.GetTexture(urlMemoryImages + "/" + imageID);
             yield return unityWebRequest.SendWebRequest();
