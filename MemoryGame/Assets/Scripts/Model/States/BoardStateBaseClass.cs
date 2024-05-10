@@ -114,6 +114,8 @@ namespace Memory.Model.States
         {
             if (tile == Board.PrewingTiles[1])
             {
+                Board.PrewingTiles.Clear();
+
                 if (Board.PrewingTiles.Count <= 0 &&
                 Board.Tiles.Where(t => t.TileState.State == TileStates.Hidden).Count() < 2)
                 {
@@ -121,11 +123,11 @@ namespace Memory.Model.States
                 }
                 else if (Board.PrewingTiles.Count <= 0)
                 {
-                    Board.PrewingTiles.Clear();
                     Board.BoardState = new BoardNoPreviewState(Board);
                     Board.ToggleActivePlayer();
                 }
             }
+        
         }
     }
     public class BoardTwoHiddingState : BoardStateBaseClass
