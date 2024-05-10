@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Memory.View
 {
@@ -19,7 +20,9 @@ namespace Memory.View
 
         private MemoryBoard _board;
 
+        [DllImport("__Internal")]
 
+        private static extern string StringReturnValue();
 
         void Start()
         {
@@ -39,7 +42,7 @@ namespace Memory.View
             Player playerTwoModel = new Player();
 
             //set player names
-            playerOneModel.Name = PlayerOneName;
+            playerOneModel.Name = StringReturnValue().Length != 0 ? StringReturnValue() :  PlayerOneName;
             playerTwoModel.Name = PlayerTwoName;
 
             //set models

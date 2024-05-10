@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: 5B5F0
   DeveloperSecretKey: 5JRFSGZC8S5ABF7AE7HZGU7AMSU398A1FS49OGS5DKOPQTMK37
   ProductionEnvironmentUrl: 
-  RequestType: 2
+  RequestType: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000
