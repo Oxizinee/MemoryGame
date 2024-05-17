@@ -43,7 +43,7 @@ namespace Memory.View
 
             //set player names
             playerOneModel.Name = StringReturnValue().Length != 0 ? StringReturnValue() :  PlayerOneName;
-          // playerOneModel.Name = PlayerOneName;
+           //playerOneModel.Name = PlayerOneName;
             playerTwoModel.Name = PlayerTwoName;
 
             //set models

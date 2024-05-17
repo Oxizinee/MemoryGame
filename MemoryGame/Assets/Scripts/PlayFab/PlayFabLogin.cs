@@ -12,8 +12,8 @@ public class PlayFabLogin: MonoBehaviour
 
     private static extern void DisplayInAlertWindow(string message);
 
-    public InputField EmailInput, PasswordInput;
-    private string _userEmail, _userPassword;
+    public InputField EmailInput, PasswordInput, UsernameInput;
+    private string _userEmail, _userPassword, _userUsername;
    [SerializeField] private LoginResult _loginResult;
     public void OnRegisterClick()
     {
@@ -24,7 +24,7 @@ public class PlayFabLogin: MonoBehaviour
             Password = _userPassword,
             RequireBothUsernameAndEmail = true,
             TitleId = "5B5F0",
-            Username = "Oxizine"
+            Username = _userUsername
         };
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegistrationSuccess, OnPlayFabFailure);
     }
@@ -33,6 +33,7 @@ public class PlayFabLogin: MonoBehaviour
     {
         _userEmail = EmailInput.text;
         _userPassword = PasswordInput.text;
+        _userUsername = UsernameInput.text;
     }
 
     private void OnRegistrationSuccess(RegisterPlayFabUserResult result)
