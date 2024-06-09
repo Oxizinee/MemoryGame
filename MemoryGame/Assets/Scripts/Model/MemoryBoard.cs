@@ -11,6 +11,9 @@ namespace Memory.Model
     public class MemoryBoard : ModelBaseClass
     {
         private IBoardState _boardState;
+
+        public PlayFabLogin PlayFabScript { get; set; }
+      
         public IBoardState BoardState
         {
             get { return _boardState; }
@@ -57,10 +60,11 @@ namespace Memory.Model
                 return PrewingTiles[0].MemoryCardId == PrewingTiles[1].MemoryCardId;
             }
         }
-        public MemoryBoard(int rows, int columns)
+        public MemoryBoard(int rows, int columns, PlayFabLogin playFabScript)
         {
             Tiles = new List<Tile>();
             PrewingTiles = new List<Tile>();
+            PlayFabScript = playFabScript;
 
             Rows = rows;
             Columns = columns;

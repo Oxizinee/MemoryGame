@@ -165,6 +165,7 @@ namespace Memory.Model.States
         public override void TileAnimationEnded(Tile tile)
         {
             Board.FinishGame();
+            Board.PlayFabScript.IncreasePlayerFounds();
         }
     }
 }

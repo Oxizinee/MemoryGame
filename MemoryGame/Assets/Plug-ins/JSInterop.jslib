@@ -3,7 +3,7 @@ mergeInto(LibraryManager.library,{
     DisplayInAlertWindow: function (messagePointer)
     {
         var message = Pointer_stringify(messagePointer);
-        window.alert(message);
+       window.alert(message);
     }
 
     
@@ -12,9 +12,10 @@ mergeInto(LibraryManager.library,{
 );
 
 mergeInto(LibraryManager.library,{
-StringReturnValue : function()
+StringReturnValue : function(elementID)
     {
-        var txtName = parent.document.getElementById('fname');
+        var stringID = Pointer_stringify(elementID)
+        var txtName = parent.document.getElementById(stringID);
         var returnString = txtName.value;
         var buffer = _malloc(returnString.length + 1);
         writeStringToMemory(returnString, buffer);

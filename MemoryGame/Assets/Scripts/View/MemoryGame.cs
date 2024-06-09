@@ -22,11 +22,11 @@ namespace Memory.View
 
         [DllImport("__Internal")]
 
-        private static extern string StringReturnValue();
+        private static extern string StringReturnValue(string elementID);
 
         void Start()
         {
-            _board = new MemoryBoard(3, 3);
+            _board = new MemoryBoard(3, 3, FindFirstObjectByType<PlayFabLogin>());
             SetPlayers("Player1", "Player2");
 
             _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);
@@ -42,9 +42,11 @@ namespace Memory.View
             Player playerTwoModel = new Player();
 
             //set player names
-            playerOneModel.Name = StringReturnValue().Length != 0 ? StringReturnValue() :  PlayerOneName;
+            playerOneModel.Name = StringReturnValue("fname").Length != 0 ? StringReturnValue("fname") :  PlayerOneName;
            //playerOneModel.Name = PlayerOneName;
-            playerTwoModel.Name = PlayerTwoName;
+           // playerTwoModel.Name = PlayerTwoName;
+            playerTwoModel.Name = StringReturnValue("sname").Length != 0 ? StringReturnValue("sname") : PlayerTwoName;
+
 
             //set models
             _player1View.GetComponent<PlayerView>().SetModel(playerOneModel);

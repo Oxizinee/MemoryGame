@@ -15,6 +15,10 @@ public class PlayFabLogin: MonoBehaviour
     public InputField EmailInput, PasswordInput, UsernameInput;
     private string _userEmail, _userPassword, _userUsername;
    [SerializeField] private LoginResult _loginResult;
+    public void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
     public void OnRegisterClick()
     {
         GetUserInput();
@@ -67,7 +71,22 @@ public class PlayFabLogin: MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
+    public void IncreasePlayerFounds()
+    {
+        AddUserVirtualCurrencyRequest request = new AddUserVirtualCurrencyRequest
+        { AuthenticationContext = _loginResult.AuthenticationContext, Amount = 100, VirtualCurrency = "GO" };
+        PlayFabClientAPI.AddUserVirtualCurrency(request, OnAddUserVirtualCurrencySuccess, OnPlayFabFailure);
+
+    }
+
+    private void OnAddUserVirtualCurrencySuccess(ModifyUserVirtualCurrencyResult result)
+    {
+        Debug.Log("You earned 100 gold! Your current balance: " + result.Balance);
+        DisplayInAlertWindow("You earned 100 gold! Your current balance: " + result.Balance);
+    }
+
     
 }
+
 
 
