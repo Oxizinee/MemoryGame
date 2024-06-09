@@ -27,7 +27,9 @@ namespace Memory.Data
     public class ImageRepository : Singleton<ImageRepository>
     {
         string urlMemoryImages = "http://localhost/www.MemoryImages.com/api/Image";
-        
+        string urlCombinationFound = "https://localhost:7126/api/Image";
+        List<DBImage> _DBimages = new List<DBImage>();
+
         public void ProcessImageIds(Action<List<int>> processIds)
         {
             StartCoroutine(GetImageIDs(processIds));
@@ -45,9 +47,8 @@ namespace Memory.Data
             else // if successful
             {
                 string json = unityWebRequest.downloadHandler.text;
-                List<DBImage> images = JsonConvert.DeserializeObject<List<DBImage>>(json);
-                
-                List<int> imageBids = images.Select(x => x.ID).ToList();
+                _DBimages = JsonConvert.DeserializeObject<List<DBImage>>(json);
+                List<int> imageBids = _DBimages.Select(x => x.ID).ToList();
                 processIds(imageBids);
             }
         }
@@ -72,5 +73,34 @@ namespace Memory.Data
                 processTexture(texture);
             }
         }
+
+        public void PostCombination(int imageID)
+        {
+            StartCoroutine(PostCombinationFound(imageID));
+        }
+       
+        public IEnumerator PostCombinationFound(int imageID)
+        {
+            DBImage image = _DBimages[imageID-1];
+           
+                string json = JsonConvert.SerializeObject(image);
+                UnityWebRequest unityWebRequest = UnityWebRequest.Put(urlCombinationFound + "/" + imageID, json);
+                unityWebRequest.SetRequestHeader("Content-Type", "application/json");
+                unityWebRequest.method = "POST";
+                yield return unityWebRequest.SendWebRequest();
+                if (unityWebRequest.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(unityWebRequest.error);
+                }
+            else
+            {
+                // string returnJson = unityWebRequest.downloadHandler.text;
+                //DBImage returnImage = JsonConvert.DeserializeObject<DBImage>(returnJson);
+                Debug.Log("put executed with id: " + imageID);
+
+            }
+
+        }
+        
     }
 }

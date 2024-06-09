@@ -1,5 +1,7 @@
+using Memory.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace Memory.Model.States
@@ -53,6 +55,9 @@ namespace Memory.Model.States
             Board.PrewingTiles.Add(tile);
             if (Board.IsCombinationFound)
             {
+                DBImage dBImage = new DBImage();
+                dBImage.ID = tile.MemoryCardId;
+                ImageRepository.Instance.PostCombination(tile.MemoryCardId);
                 Board.BoardState = new BoardTwoFoundState(Board);
                 Board.AddScore();
                 foreach (Tile t in Board.PrewingTiles)

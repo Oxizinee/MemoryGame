@@ -20,9 +20,9 @@ namespace Memory.View
 
         private MemoryBoard _board;
 
-        [DllImport("__Internal")]
+     //  [DllImport("__Internal")]
 
-        private static extern string StringReturnValue(string elementID);
+       // private static extern string StringReturnValue(string elementID);
 
         void Start()
         {
@@ -42,10 +42,10 @@ namespace Memory.View
             Player playerTwoModel = new Player();
 
             //set player names
-            playerOneModel.Name = StringReturnValue("fname").Length != 0 ? StringReturnValue("fname") :  PlayerOneName;
-           //playerOneModel.Name = PlayerOneName;
-           // playerTwoModel.Name = PlayerTwoName;
-            playerTwoModel.Name = StringReturnValue("sname").Length != 0 ? StringReturnValue("sname") : PlayerTwoName;
+           // playerOneModel.Name = StringReturnValue("fname").Length != 0 ? StringReturnValue("fname") :  PlayerOneName;
+           playerOneModel.Name = PlayerOneName;
+            playerTwoModel.Name = PlayerTwoName;
+           // playerTwoModel.Name = StringReturnValue("sname").Length != 0 ? StringReturnValue("sname") : PlayerTwoName;
 
 
             //set models

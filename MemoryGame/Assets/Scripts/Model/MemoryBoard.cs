@@ -141,5 +141,6 @@ namespace Memory.Model
         {
             CurrentPlayer.Score++;
         }
+
     }
 }
