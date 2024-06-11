@@ -27,7 +27,6 @@ namespace Memory.Data
     public class ImageRepository : Singleton<ImageRepository>
     {
         string urlMemoryImages = "http://localhost/www.MemoryImages.com/api/Image";
-        string urlCombinationFound = "https://localhost:7126/api/Image";
         List<DBImage> _DBimages = new List<DBImage>();
 
         public void ProcessImageIds(Action<List<int>> processIds)
@@ -79,12 +78,12 @@ namespace Memory.Data
             StartCoroutine(PostCombinationFound(imageID));
         }
        
-        public IEnumerator PostCombinationFound(int imageID)
+        private IEnumerator PostCombinationFound(int imageID)
         {
             DBImage image = _DBimages[imageID-1];
            
                 string json = JsonConvert.SerializeObject(image);
-                UnityWebRequest unityWebRequest = UnityWebRequest.Put(urlCombinationFound + "/" + imageID, json);
+                UnityWebRequest unityWebRequest = UnityWebRequest.Put(urlMemoryImages + "/" + imageID, json);
                 unityWebRequest.SetRequestHeader("Content-Type", "application/json");
                 unityWebRequest.method = "POST";
                 yield return unityWebRequest.SendWebRequest();
