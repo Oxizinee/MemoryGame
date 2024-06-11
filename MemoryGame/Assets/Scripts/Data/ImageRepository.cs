@@ -27,7 +27,6 @@ namespace Memory.Data
     public class ImageRepository : Singleton<ImageRepository>
     {
         string urlMemoryImages = "http://localhost/www.MemoryImages.com/api/Image";
-        List<DBImage> _DBimages = new List<DBImage>();
 
         public void ProcessImageIds(Action<List<int>> processIds)
         {
@@ -46,7 +45,7 @@ namespace Memory.Data
             else // if successful
             {
                 string json = unityWebRequest.downloadHandler.text;
-                _DBimages = JsonConvert.DeserializeObject<List<DBImage>>(json);
+                List<DBImage> _DBimages = JsonConvert.DeserializeObject<List<DBImage>>(json);
                 List<int> imageBids = _DBimages.Select(x => x.ID).ToList();
                 processIds(imageBids);
             }
@@ -80,7 +79,8 @@ namespace Memory.Data
        
         private IEnumerator PostCombinationFound(int imageID)
         {
-            DBImage image = _DBimages[imageID-1];
+            DBImage image = new DBImage();
+            image.ID = imageID;
            
                 string json = JsonConvert.SerializeObject(image);
                 UnityWebRequest unityWebRequest = UnityWebRequest.Put(urlMemoryImages + "/" + imageID, json);
@@ -93,8 +93,6 @@ namespace Memory.Data
                 }
             else
             {
-                // string returnJson = unityWebRequest.downloadHandler.text;
-                //DBImage returnImage = JsonConvert.DeserializeObject<DBImage>(returnJson);
                 Debug.Log("put executed with id: " + imageID);
 
             }
