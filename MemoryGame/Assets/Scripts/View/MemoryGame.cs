@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using Memory.Data;
 
 namespace Memory.View
 {
@@ -17,16 +18,15 @@ namespace Memory.View
         [SerializeField] private GameObject _player2View;
 
         [SerializeField] private BoardStates _boardState;
-
         private MemoryBoard _board;
 
-    //   [DllImport("__Internal")]
+       [DllImport("__Internal")]
 
-      //  private static extern string StringReturnValue(string elementID);
+        private static extern string StringReturnValue(string elementID);
 
         void Start()
         {
-            _board = new MemoryBoard(3, 3, FindFirstObjectByType<PlayFabLogin>());
+            _board = new MemoryBoard(3, 3, FindFirstObjectByType<PlayFabLogin>(), "5");
             SetPlayers("Player1", "Player2");
 
             _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);

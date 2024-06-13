@@ -1,3 +1,4 @@
+using Assets.Scripts.Data;
 using Memory.Data;
 using Memory.Model.States;
 using Memory.Utilities;
@@ -51,6 +52,7 @@ namespace Memory.Model
             }
         }
         public List<Tile> Tiles { get; set; }
+        public List<int> TileIds { get; set; }
         public List<Tile> PrewingTiles { get; set; }
         public bool IsCombinationFound
         {
@@ -60,7 +62,7 @@ namespace Memory.Model
                 return PrewingTiles[0].MemoryCardId == PrewingTiles[1].MemoryCardId;
             }
         }
-        public MemoryBoard(int rows, int columns, PlayFabLogin playFabScript)
+        public MemoryBoard(int rows, int columns, PlayFabLogin playFabScript, string amountOfIds)
         {
             Tiles = new List<Tile>();
             PrewingTiles = new List<Tile>();
@@ -80,22 +82,20 @@ namespace Memory.Model
                 }
             }
 
-            AssignMemoryCardIds();
+            AssignMemoryCardIds(amountOfIds);
+            PlaySessionRepository.Instance.PostPlaySessionWeb() ;
         }
-        private void AssignMemoryCardIds()
+        private void AssignMemoryCardIds(string amountOfIds)
         {
-            ImageRepository repository = ImageRepository.Instance;
-            repository.ProcessImageIds(AssignMemoryCardIds);
+            PlaySessionRepository repository = PlaySessionRepository.Instance;
+            repository.ProcessImageIds(AssignMemoryCardIds ,amountOfIds);
         }
-        private void AssignMemoryCardIds(List<int> memoryCardIDs)
+        public void AssignMemoryCardIds(List<int> memoryCardIDs)
         {
-            memoryCardIDs = memoryCardIDs.Shuffle();
-            List<Tile> ShuffledCards = ExtensionMethods.Shuffle(Tiles);
-
             int memoryCardIndex = 0;
             bool first = true;
 
-           foreach(Tile tile in ShuffledCards) 
+            foreach (Tile tile in Tiles) 
             {
                 tile.MemoryCardId = memoryCardIDs[memoryCardIndex];
                 if (first)
