@@ -61,7 +61,8 @@ namespace Memory.Data
             imageIds.ImageIds = _shuffledIds;
 
             string json = JsonConvert.SerializeObject(imageIds);
-            UnityWebRequest unityWebRequest = UnityWebRequest.Put("https://localhost:7193/api/PlaySessionOther", json);
+            UnityWebRequest unityWebRequest = UnityWebRequest.Put(urlPlaySessionOther, json);
+            // Set the upload handler to the byte array data
             unityWebRequest.SetRequestHeader("Content-Type", "application/json");
             unityWebRequest.method = "POST";
             yield return unityWebRequest.SendWebRequest();

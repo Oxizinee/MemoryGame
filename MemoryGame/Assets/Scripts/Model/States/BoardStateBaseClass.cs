@@ -24,7 +24,6 @@ namespace Memory.Model.States
         public override BoardStates State { get; } = BoardStates.NoPreview;
         public BoardNoPreviewState(MemoryBoard board): base(board)
         {
-
         }
         public override void TileAnimationEnded(Tile tile)
         {
@@ -45,12 +44,12 @@ namespace Memory.Model.States
         public override BoardStates State { get; } = BoardStates.OnePreview;
         public BoardOnePreviewState(MemoryBoard board): base(board)
         {
+            PlaySessionRepository.Instance.PostPlaySessionWeb();
 
         }
         public override void AddPreview(Tile tile)
         {
             if(tile.TileState.State != TileStates.Hidden) return;
-
             tile.TileState = new TilePreviewState(tile);
             Board.PrewingTiles.Add(tile);
             if (Board.IsCombinationFound)

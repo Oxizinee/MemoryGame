@@ -83,7 +83,6 @@ namespace Memory.Model
             }
 
             AssignMemoryCardIds(amountOfIds);
-            PlaySessionRepository.Instance.PostPlaySessionWeb() ;
         }
         private void AssignMemoryCardIds(string amountOfIds)
         {
